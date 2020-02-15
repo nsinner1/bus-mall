@@ -3,7 +3,7 @@
 var imageOneEl = document.getElementbyid('picture1');
 var imageTwoEl = document.getElementbyid('picture2');
 var imageThreeEl = document.getElementById('picture3');
-var sectionEl = document.getElementbyid('image-container');
+// var sectionEl = document.getElementbyid('image-container');
 
 imageOneEl.src = '';
 imageOneEl.alt = '';
