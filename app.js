@@ -7,7 +7,9 @@ var sectionEl = document.getElementById('image-container');
 
 
 BusMallItems.lastShown = [];
+BusMallItems.clicked = 0;
 var allItems = [];
+var maxClicks = 10;
 
 function BusMallItems(src, alt, title){
   this.src = src;
@@ -60,9 +62,16 @@ function handleClick(event) {
   for (var i = 0; i < allItems.length; i++){
     if(clickedItem === allItems[i].title){
       allItems[i].clicked++;
+
+      maxClicks--;
+    //   console.log(maxClicks);
+      if(maxClicks === 0){
+        sectionEl.removeEventListener('click', handleClick);
+        alert('You have reached your allotted number of clicks');
+      }
     }
+    imageGenerator();
   }
-  imageGenerator();
 }
 
 new BusMallItems('img/banana.jpg', 'banana', 'banana');
@@ -75,4 +84,15 @@ new BusMallItems('img/dog-duck.jpg', 'dog-duck', 'dog-duck');
 
 sectionEl.addEventListener('click', handleClick);
 
+
+
+
 imageGenerator();
+
+
+// if (handleClick > maxRounds){
+//   sectionEl.removeEventListener('click', handleClick);
+//   alert('stop');
+// } else {
+//   imageGenerator();
+// }
