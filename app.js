@@ -64,7 +64,7 @@ function handleClick(event) {
       allItems[i].clicked++;
 
       maxClicks--;
-    //   console.log(maxClicks);
+      //   console.log(maxClicks);
       if(maxClicks === 0){
         sectionEl.removeEventListener('click', handleClick);
         alert('You have reached your allotted number of clicks');
@@ -81,18 +81,20 @@ new BusMallItems('img/bubblegum.jpg', 'bubblegum', 'bubblegum');
 new BusMallItems('img/chair.jpg', 'chair', 'chair');
 new BusMallItems('img/cthulhu.jpg', 'cthulhu', 'cthulhu');
 new BusMallItems('img/dog-duck.jpg', 'dog-duck', 'dog-duck');
+new BusMallItems('img/dragon.jpg', 'dragon', 'dragon');
+new BusMallItems('img/img.jpg', 'img', 'img');
+new BusMallItems('img/pen.jpg', 'pen', 'pen');
+new BusMallItems('img/pet-sweep.jpg', 'pet-sweep', 'pet-sweep');
+new BusMallItems('img/scissors.jpg', 'scissors', 'scissors');
+new BusMallItems('img/shark.jpg', 'shark', 'shark');
+new BusMallItems('img/sweep.png', 'sweep', 'sweep');
+new BusMallItems('img/tauntaun.jpg', 'tauntaun', 'tauntaun');
+new BusMallItems('img/unicorn.jpg', 'unicorn', 'unicorn');
+new BusMallItems('img/usb.gif', 'usb', 'usb');
+new BusMallItems('img/water-can.jpg', 'water-can', 'water-can');
+new BusMallItems('img/wine-glass.jpg', 'wine-glass', 'wine-glass');
 
 sectionEl.addEventListener('click', handleClick);
 
-
-
-
 imageGenerator();
 
-
-// if (handleClick > maxRounds){
-//   sectionEl.removeEventListener('click', handleClick);
-//   alert('stop');
-// } else {
-//   imageGenerator();
-// }
