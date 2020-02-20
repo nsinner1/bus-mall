@@ -6,8 +6,8 @@ var imageThreeEl = document.getElementById('picture3');
 var sectionEl = document.getElementById('image-container');
 
 
-BusMallItems.lastShown = [];
-BusMallItems.clicked = 0;
+var lastShown = [];
+
 var allItems = [];
 var maxClicks = 10;
 
@@ -26,19 +26,30 @@ function random(max) {
 }
 
 function imageGenerator(){
+// lst clicked array.length is greater then 0; .includes
+
+
   var pic1 = random(allItems.length);
   var pic2 = random(allItems.length);
   var pic3 = random(allItems.length);
 
-  while (pic1 === pic2 || pic2 === pic3 || pic1 === pic3 || BusMallItems.lastShown.includes(pic1) || BusMallItems.lastShown.includes(pic2) || BusMallItems.lastShown.includes(pic3)){
+  while (pic1 === pic2 || pic2 === pic3 || pic1 === pic3 || lastShown.includes(pic1) || lastShown.includes(pic2) || lastShown.includes(pic3)) {
+    pic1 = random(allItems.length);
     pic2 = random(allItems.length);
     pic3 = random(allItems.length);
-    pic1 = random(allItems.length);
+    console.log('cuurentPictures: ' + pic1+' '+ pic2+' ' + pic3);
+    console.log(lastShown);
   }
+  console.log('outofloop');
+  console.log(lastShown);
+  lastShown = [];
+  lastShown.push(pic1);
+  lastShown.push(pic2);
+  lastShown.push(pic3);
 
-  BusMallItems.lastShown[0] = pic1;
-  BusMallItems.lastShown[1] = pic2;
-  BusMallItems.lastShown[2] = pic3;
+  // lastShown[0] = pic1;
+  // lastShown[1] = pic2;
+  // lastShown[2] = pic3;
 
   imageOneEl.src = allItems[pic1].src;
   imageOneEl.title = allItems[pic1].title;
@@ -64,14 +75,14 @@ function handleClick(event) {
       allItems[i].clicked++;
 
       maxClicks--;
-      //   console.log(maxClicks);
+      console.log(maxClicks);
       if(maxClicks === 0){
         sectionEl.removeEventListener('click', handleClick);
         alert('You have reached your allotted number of clicks');
       }
     }
-    imageGenerator();
   }
+  imageGenerator();
 }
 
 new BusMallItems('img/banana.jpg', 'banana', 'banana');
