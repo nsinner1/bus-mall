@@ -8,6 +8,8 @@ var sectionEl = document.getElementById('image-container');
 
 var lastShown = [];
 var allItems = [];
+var numberArray = [];
+var numberViewed = [];
 var maxClicks = 10;
 
 function BusMallItems(src, alt, title){
@@ -33,11 +35,11 @@ function imageGenerator(){
     pic1 = random(allItems.length);
     pic2 = random(allItems.length);
     pic3 = random(allItems.length);
-    console.log('curentPictures: ' + pic1+' '+ pic2+' ' + pic3);
-    console.log(lastShown);
+    // console.log('currentPictures: ' + pic1+' '+ pic2+' ' + pic3);
+    // console.log(lastShown);
   }
-  console.log('outofloop');
-  console.log(lastShown);
+  // console.log('outofloop');
+  // console.log(lastShown);
   lastShown = [];
   lastShown.push(pic1);
   lastShown.push(pic2);
@@ -61,17 +63,20 @@ function imageGenerator(){
 
 
 function handleClick(event) {
+  // numberArray = [];
   var clickedItem = event.target.title;
   for (var i = 0; i < allItems.length; i++){
     if(clickedItem === allItems[i].title){
       allItems[i].clicked++;
-
+      
       maxClicks--;
       // console.log(maxClicks);
       if(maxClicks === 0){
         sectionEl.removeEventListener('click', handleClick);
+        timesClicked();
+        timesViewed();
+        chartDisplay();
         renderList();
-        alert('You have reached your allotted number of clicks');
       }
     }
   }
@@ -86,12 +91,85 @@ function renderData(parentId, elem, elemContent) {
 }
 
 function renderList(){
-  for(var i = 0; i < allItems.length; i++){
-    renderData('results', 'section', allItems[i].title+' clicked: '+ allItems[i].clicked+' viewed: '+allItems[i].viewed);
+  for(var x = 0; x < allItems.length; x++){
+    renderData('results', 'section', allItems[x].title+' clicked: '+ allItems[x].clicked+' viewed: '+allItems[x].viewed);
   }
 }
 
+var newArray = ['banana', 'breakfast', 'boots', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'img', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 
+function timesClicked(){
+  numberArray = [];
+  for(var y = 0; y < allItems.length; y++){
+    numberArray.push(allItems[y].clicked);
+  }
+}
+
+function timesViewed(){
+  numberViewed = [];
+  for(var z = 0; z < allItems.length; z++){
+    numberViewed.push(allItems[z].viewed);
+  }
+}
+
+function chartDisplay(){
+  var ctx = document.getElementById('myChart');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: newArray,
+      datasets: [{
+        label: '# of Clicks',
+        data: numberArray,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        
+        // label: '# of Views',
+        // data: numberViewed,
+        // backgroundColor: [
+        //   'rgba(255, 99, 132, 0.2)',
+        //   'rgba(54, 162, 235, 0.2)',
+        //   'rgba(255, 206, 86, 0.2)',
+        //   'rgba(75, 192, 192, 0.2)',
+        //   'rgba(153, 102, 255, 0.2)',
+        //   'rgba(255, 159, 64, 0.2)'
+        // ],
+        // borderColor: [
+        //   'rgba(255, 99, 132, 1)',
+        //   'rgba(54, 162, 235, 1)',
+        //   'rgba(255, 206, 86, 1)',
+        //   'rgba(75, 192, 192, 1)',
+        //   'rgba(153, 102, 255, 1)',
+        //   'rgba(255, 159, 64, 1)'
+        // ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
 
 new BusMallItems('img/banana.jpg', 'banana', 'banana');
 new BusMallItems('img/breakfast.jpg', 'breakfast', 'breakfast');
@@ -112,6 +190,8 @@ new BusMallItems('img/unicorn.jpg', 'unicorn', 'unicorn');
 new BusMallItems('img/usb.gif', 'usb', 'usb');
 new BusMallItems('img/water-can.jpg', 'water-can', 'water-can');
 new BusMallItems('img/wine-glass.jpg', 'wine-glass', 'wine-glass');
+
+
 
 sectionEl.addEventListener('click', handleClick);
 
