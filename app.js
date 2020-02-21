@@ -7,7 +7,6 @@ var sectionEl = document.getElementById('image-container');
 
 
 var lastShown = [];
-
 var allItems = [];
 var maxClicks = 10;
 
@@ -26,9 +25,6 @@ function random(max) {
 }
 
 function imageGenerator(){
-// lst clicked array.length is greater then 0; .includes
-
-
   var pic1 = random(allItems.length);
   var pic2 = random(allItems.length);
   var pic3 = random(allItems.length);
@@ -37,7 +33,7 @@ function imageGenerator(){
     pic1 = random(allItems.length);
     pic2 = random(allItems.length);
     pic3 = random(allItems.length);
-    console.log('cuurentPictures: ' + pic1+' '+ pic2+' ' + pic3);
+    console.log('curentPictures: ' + pic1+' '+ pic2+' ' + pic3);
     console.log(lastShown);
   }
   console.log('outofloop');
@@ -46,10 +42,6 @@ function imageGenerator(){
   lastShown.push(pic1);
   lastShown.push(pic2);
   lastShown.push(pic3);
-
-  // lastShown[0] = pic1;
-  // lastShown[1] = pic2;
-  // lastShown[2] = pic3;
 
   imageOneEl.src = allItems[pic1].src;
   imageOneEl.title = allItems[pic1].title;
@@ -75,15 +67,31 @@ function handleClick(event) {
       allItems[i].clicked++;
 
       maxClicks--;
-      console.log(maxClicks);
+      // console.log(maxClicks);
       if(maxClicks === 0){
         sectionEl.removeEventListener('click', handleClick);
+        renderList();
         alert('You have reached your allotted number of clicks');
       }
     }
   }
   imageGenerator();
 }
+
+function renderData(parentId, elem, elemContent) {
+  var parentEL = document.getElementById(parentId);
+  var pageEl = document.createElement(elem);
+  pageEl.textContent = elemContent;
+  parentEL.appendChild(pageEl);
+}
+
+function renderList(){
+  for(var i = 0; i < allItems.length; i++){
+    renderData('results', 'section', allItems[i].title+' clicked: '+ allItems[i].clicked+' viewed: '+allItems[i].viewed);
+  }
+}
+
+
 
 new BusMallItems('img/banana.jpg', 'banana', 'banana');
 new BusMallItems('img/breakfast.jpg', 'breakfast', 'breakfast');
