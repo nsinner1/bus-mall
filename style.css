@@ -1,8 +1,35 @@
+body{
+    background-color: #EDDEA4;
+    color: rgb(107, 109, 106);
+}
+h1 {
+    text-align: center;
+    font-size: 100px;
+    margin-bottom: 50px;
+}
+
+p {
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 40px;
+}
+
 li {
     display: inline-block;
 }
 
 #picture1, #picture2, #picture3 {
+    margin-left: 50px;
     height: 500px;
     width: 500px;
+}
+
+div {
+    margin-top: 30px;
+}
+
+#results {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 30px;
 }

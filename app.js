@@ -10,7 +10,7 @@ var lastShown = [];
 var allItems = [];
 var numberArray = [];
 var numberViewed = [];
-var maxClicks = 10;
+var maxClicks = 25;
 
 function BusMallItems(src, alt, title){
   this.src = src;
@@ -92,7 +92,7 @@ function renderData(parentId, elem, elemContent) {
 
 function renderList(){
   for(var x = 0; x < allItems.length; x++){
-    renderData('results', 'section', allItems[x].title+' clicked: '+ allItems[x].clicked+' viewed: '+allItems[x].viewed);
+    renderData('results', 'section', allItems[x].title+' was clicked: '+ allItems[x].clicked+' and viewed: '+allItems[x].viewed+ ' times.');
   }
 }
 
