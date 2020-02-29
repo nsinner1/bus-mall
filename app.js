@@ -77,10 +77,16 @@ function handleClick(event) {
         timesViewed();
         chartDisplay();
         renderList();
+        toLocalStorage();
       }
     }
   }
   imageGenerator();
+}
+
+function toLocalStorage(){
+  var arrayString = JSON.stringify(allItems);
+  localStorage.setItem('bmItems', arrayString);
 }
 
 function renderData(parentId, elem, elemContent) {
@@ -153,29 +159,46 @@ function chartDisplay(){
   });
 }
 
-new BusMallItems('img/banana.jpg', 'banana', 'banana');
-new BusMallItems('img/breakfast.jpg', 'breakfast', 'breakfast');
-new BusMallItems('img/boots.jpg', 'boots', 'boots');
-new BusMallItems('img/bubblegum.jpg', 'bubblegum', 'bubblegum');
-new BusMallItems('img/chair.jpg', 'chair', 'chair');
-new BusMallItems('img/cthulhu.jpg', 'cthulhu', 'cthulhu');
-new BusMallItems('img/dog-duck.jpg', 'dog-duck', 'dog-duck');
-new BusMallItems('img/dragon.jpg', 'dragon', 'dragon');
-new BusMallItems('img/img.jpg', 'img', 'img');
-new BusMallItems('img/pen.jpg', 'pen', 'pen');
-new BusMallItems('img/pet-sweep.jpg', 'pet-sweep', 'pet-sweep');
-new BusMallItems('img/scissors.jpg', 'scissors', 'scissors');
-new BusMallItems('img/shark.jpg', 'shark', 'shark');
-new BusMallItems('img/sweep.png', 'sweep', 'sweep');
-new BusMallItems('img/tauntaun.jpg', 'tauntaun', 'tauntaun');
-new BusMallItems('img/unicorn.jpg', 'unicorn', 'unicorn');
-new BusMallItems('img/usb.gif', 'usb', 'usb');
-new BusMallItems('img/water-can.jpg', 'water-can', 'water-can');
-new BusMallItems('img/wine-glass.jpg', 'wine-glass', 'wine-glass');
+function populateItems(){
+  if(localStorage.getItem('bmItems')){
+    // console.log('There is local Storage');
+    var allStorageItems = JSON.parse(localStorage.getItem('bmItems'));
+    // console.log(allStorageItems);
+    for(var i = 0; i < allStorageItems.length; i++){
+      new BusMallItems(
+        allStorageItems[i].src,
+        allStorageItems[i].alt,
+        allStorageItems[i].viewed,
+        allStorageItems[i].clicked);
+    }
+  } else {
+    new BusMallItems('img/banana.jpg', 'banana', 'banana');
+    new BusMallItems('img/breakfast.jpg', 'breakfast', 'breakfast');
+    new BusMallItems('img/boots.jpg', 'boots', 'boots');
+    new BusMallItems('img/bubblegum.jpg', 'bubblegum', 'bubblegum');
+    new BusMallItems('img/chair.jpg', 'chair', 'chair');
+    new BusMallItems('img/cthulhu.jpg', 'cthulhu', 'cthulhu');
+    new BusMallItems('img/dog-duck.jpg', 'dog-duck', 'dog-duck');
+    new BusMallItems('img/dragon.jpg', 'dragon', 'dragon');
+    new BusMallItems('img/img.jpg', 'img', 'img');
+    new BusMallItems('img/pen.jpg', 'pen', 'pen');
+    new BusMallItems('img/pet-sweep.jpg', 'pet-sweep', 'pet-sweep');
+    new BusMallItems('img/scissors.jpg', 'scissors', 'scissors');
+    new BusMallItems('img/shark.jpg', 'shark', 'shark');
+    new BusMallItems('img/sweep.png', 'sweep', 'sweep');
+    new BusMallItems('img/tauntaun.jpg', 'tauntaun', 'tauntaun');
+    new BusMallItems('img/unicorn.jpg', 'unicorn', 'unicorn');
+    new BusMallItems('img/usb.gif', 'usb', 'usb');
+    new BusMallItems('img/water-can.jpg', 'water-can', 'water-can');
+    new BusMallItems('img/wine-glass.jpg', 'wine-glass', 'wine-glass');
+  }
+}
+
 
 
 
 sectionEl.addEventListener('click', handleClick);
 
+populateItems();
 imageGenerator();
 
