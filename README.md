@@ -15,3 +15,8 @@ created rendered list to display a list of how many times picture was clicked an
 
 2/25
 added some CSS and DRY code
+
+2/26-2/29 
+offically added local storage 
+cleaned up code
+
